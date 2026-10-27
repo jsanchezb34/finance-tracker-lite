@@ -42,7 +42,7 @@ main {
 }
 
 #main-total h3 {
-    font-size: 4rem;
+    font-size: 3rem;
     margin: 0.5rem 0 0;
 }
 
@@ -80,9 +80,11 @@ main {
     background-color: var(--background-dark);
     border-radius: 12px;
     padding-left: 1rem;
+    padding: 0;
 }
 
 .totales p {
+    font-size: .8rem;
     margin: .4rem;
     text-align: left;
 }
