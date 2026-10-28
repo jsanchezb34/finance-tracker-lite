@@ -125,11 +125,19 @@ function mostrarBanner(indices) {
   const banner = document.getElementById("banner");
   banner.innerHTML = `
     <div class="popup">
+      <div class="popup-fila popup-encabezado">
+        <span></span>
+        <span>Categoría</span>
+        <span>Monto</span>
+        <span>%</span>
+      </div>
       ${indices.map(i => `
-        <p>
+        <div class="popup-fila">
           <span class="punto" style="background:${colores[i]}"></span>
-          ${grupos[i][0]} ${porcentaje(grupos[i][1])}%
-        </p>
+          <span>${grupos[i][0]}</span>
+          <span>${grupos[i][2].toFixed(2)}</span>
+          <span>${porcentaje(grupos[i][1])}%</span>
+        </div>
       `).join("")}
       <button id="cerrar-popup" class="boton" type="button">Cerrar</button>
     </div>
@@ -141,18 +149,20 @@ function mostrarBanner(indices) {
   });
 }
 
+
 function mostrarDona(gastosPeriodo, presupuesto) {
   const gastado = sumarMontos(gastosPeriodo);
   const haySobregiro = gastado > presupuesto;
-  grupos = agruparTop(totalesPorCategoria(gastosPeriodo), 5);
+    grupos = agruparTop(totalesPorCategoria(gastosPeriodo), 5)
+    .map(([nombre, total]) => [nombre, total, total]);
 
   if (haySobregiro) {
     // las categorías se reducen para ocupar solo el presupuesto
     const factor = presupuesto / gastado;
-    grupos = grupos.map(([nombre, total]) => [nombre, total * factor]);
-    grupos.push(["Sobregiro", gastado - presupuesto]);
+    grupos = grupos.map(([nombre, total, real]) => [nombre, total * factor, real]);
+    grupos.push(["Sobregiro", gastado - presupuesto, gastado - presupuesto]);
   } else if (presupuesto > gastado) {
-    grupos.push(["Disponible", presupuesto - gastado]);
+    grupos.push(["Disponible", presupuesto - gastado, presupuesto - gastado]);
   }
 
   suma = grupos.reduce((s, [, total]) => s + total, 0);
