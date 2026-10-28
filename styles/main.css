@@ -238,3 +238,70 @@ main {
     font-family: inherit;
     font-size: 1rem;
 }
+
+/* Total filtrado */
+#total-filtro {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    box-sizing: border-box;
+    background-color: var(--main);
+    color: var(--text-light);
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Formulario */
+#form-gasto {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    background-color: var(--background2);
+    border-radius: 12px;
+}
+
+#form-gasto label {
+    font-weight: bold;
+}
+
+#form-gasto input {
+    padding: 0.6rem;
+    border: 1px solid var(--background-dark);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+#form-gasto button {
+    margin-top: 8px;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+body[data-pagina="gastos"] .fila {
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+}
+
+#filtros .ancho {
+    grid-column: 1 / -1;
+}
+
+/* Tarjeta de la página de gastos */
+body[data-pagina="gastos"] #main-card {
+    flex-direction: column;
+}
+
+body[data-pagina="gastos"] #main-total h3 {
+    font-size: 2.5rem;
+}
+
+body[data-pagina="gastos"] #main-card > section:first-child .boton {
+    align-self: center;
+}

@@ -42,11 +42,12 @@ function formatearFechaCompleta(fecha) {
   return `${dia}/${mes}/${year}`;
 }
 
-function mostrarLista(gastos, contenedor) {
+function mostrarLista(gastos, contenedor, conDetalle = false) {
   contenedor.innerHTML = gastos.map(g => `
-    <div class="fila">
+    <div class="fila${conDetalle ? " con-detalle" : ""}">
       <span>${formatearFecha(g.fecha)}</span>
       <span>${g.categoria}</span>
+      ${conDetalle ? `<span>${g.detalle}</span>` : ""}
       <span>${g.monto.toFixed(2)}</span>
     </div>
   `).join("");
@@ -241,18 +242,10 @@ async function iniciar() {
       mostrarDona(gastosPeriodo, periodo.presupuesto);
     }
   } else if (pagina === "gastos") {
-    mostrarLista([...gastos].reverse(), contenedor);
-
-      } else if (pagina === "gastos") {
     const periodos = parsearPeriodos(await cargarTexto("data/periodos.csv"));
     iniciarFiltros(gastos, periodos, contenedor);
   }
-  }
-
-  
-
-
-
+}
 
 iniciar();
 
@@ -263,11 +256,16 @@ function etiquetaPeriodo(p) {
   return `${formatearFechaCompleta(p.inicio)} – ${fin}`;
 }
 
+function normalizar(texto) {
+  return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 function iniciarFiltros(gastos, periodos, contenedor) {
   const selCategoria = document.getElementById("filtro-categoria");
   const selPeriodo = document.getElementById("filtro-periodo");
   const campoDesde = document.getElementById("filtro-desde");
   const campoHasta = document.getElementById("filtro-hasta");
+  const campoTexto = document.getElementById("filtro-texto");
 
   const categorias = [...new Set(gastos.map(g => g.categoria))]
     .sort((a, b) => a.localeCompare(b));
@@ -282,18 +280,23 @@ function iniciarFiltros(gastos, periodos, contenedor) {
     const categoria = selCategoria.value;
     const desde = campoDesde.value;
     const hasta = campoHasta.value;
+    const texto = normalizar(campoTexto.value.trim());
 
     const filtrados = gastos.filter(g =>
       (!categoria || g.categoria === categoria) &&
       (!desde || g.fecha >= desde) &&
-      (!hasta || g.fecha <= hasta)
+      (!hasta || g.fecha <= hasta) &&
+      (!texto || normalizar(g.detalle || "").includes(texto))
     );
+
+    document.getElementById("total-valor").textContent =
+      `Bs ${sumarMontos(filtrados).toFixed(2)}`;
 
     if (filtrados.length === 0) {
       contenedor.innerHTML = "<p>No hay gastos con esos filtros.</p>";
       return;
     }
-    mostrarLista([...filtrados].reverse(), contenedor);
+    mostrarLista([...filtrados].reverse(), contenedor, true);
   }
 
   selCategoria.addEventListener("change", actualizar);
@@ -311,6 +314,8 @@ function iniciarFiltros(gastos, periodos, contenedor) {
       actualizar();
     });
   });
+
+  campoTexto.addEventListener("input", actualizar);
 
   actualizar();
 }

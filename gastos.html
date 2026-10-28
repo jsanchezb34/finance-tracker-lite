@@ -9,36 +9,47 @@
 <body data-pagina="gastos">
   <main>
     <h1>Todos los gastos</h1>
-    <a href="./index.html" class="boton">Volver</a>
-  
 
-    <section id="filtros">
-  <label>Categoría
-    <select id="filtro-categoria">
-      <option value="">Todas</option>
-    </select>
-  </label>
-  <label>Periodo
-    <select id="filtro-periodo">
-      <option value="">Todos</option>
-    </select>
-  </label>
-  <label>Desde
-    <input type="date" id="filtro-desde">
-  </label>
-  <label>Hasta
-    <input type="date" id="filtro-hasta">
-  </label>
-</section>
+    <section id="main-card">
+      <section>
+        <div id="main-total">
+          <h3 id="total-valor">Bs 0.00</h3>
+          <p>total</p>
+        </div>
+        <a href="./index.html" class="boton">Volver</a>
+      </section>
 
+      <section id="filtros">
+        <label>Categoría
+          <select id="filtro-categoria">
+            <option value="">Todas</option>
+          </select>
+        </label>
+        <label>Periodo
+          <select id="filtro-periodo">
+            <option value="">Todos</option>
+          </select>
+        </label>
+        <label class="ancho">Buscar en detalle
+          <input type="text" id="filtro-texto" placeholder="Ej: cena, gasolina">
+        </label>
+        <label>Desde
+          <input type="date" id="filtro-desde">
+        </label>
+        <label>Hasta
+          <input type="date" id="filtro-hasta">
+        </label>
+      </section>
+    </section>
 
     <section id="lista">
-      <div class="fila encabezado" >
+      <div class="fila encabezado">
         <span>Fecha</span>
         <span>Categoría</span>
+        <span>Detalle</span>
         <span>Monto</span>
       </div>
-      <div id="lista-filas" ></div>
+      <div id="lista-filas"></div>
     </section>
   </main>
 

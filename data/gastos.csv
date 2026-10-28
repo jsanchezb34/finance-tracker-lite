@@ -3,7 +3,7 @@ fecha,categoria,detalle,monto_bs
 2026-01-12,Transporte,Gasolina/Moto,50
 2026-01-12,Personal,Celular,1500
 2026-01-12,Comida,Queso,16
-2026-01-12,Donativos,Diezmo,490
+2026-01-12,Ofrendas,Diezmo,490
 2026-01-13,Personal,Spotify,24
 2026-01-15,Comida,Cena,14
 2026-01-16,Comida,Cena,14
@@ -12,8 +12,8 @@ fecha,categoria,detalle,monto_bs
 2026-01-19,Ahorro,Cuota,234
 2026-01-20,Comida,Sodas,66
 2026-01-20,Personal,Protector de pantalla,80
-2026-01-20,Bicicleta,Luz trasera,60
-2026-01-21,Cita,Jugos,25
+2026-01-20,Hobbies,Luz bicicleta trasera,60
+2026-01-21,Comida,Jugos,25
 2026-01-21,Transporte,Gasolina/Moto,46
 2026-01-23,Diversión,Viaje trekking,220
 2026-01-24,Comida,Cena,27
@@ -194,7 +194,7 @@ fecha,categoria,detalle,monto_bs
 2026-05-21,Ropa,Ropa,50
 2026-05-21,Ropa,Ropa,60
 2026-05-23,Comida,Cena,17
-2026-05-23,Desconocidos,,11.5
+2026-05-23,Otros,,11.5
 2026-05-23,Comida,Snacks,5
 2026-05-23,Comida,Snacks,7
 2026-05-23,Comida,Cena,39
@@ -202,9 +202,9 @@ fecha,categoria,detalle,monto_bs
 2026-05-26,Comida,Soda,28
 2026-05-30,Comida,Cena,107
 2026-05-30,Personal,Salud,150
-2026-05-30,Desconocidos,,47
+2026-05-30,Otros,,47
 2026-05-31,Comida,Refrigerio,34
-2026-06-02,Desconocidos,,48
+2026-06-02,Otros,,48
 2026-06-02,Transporte,Gasolina,50
 2026-06-02,Comida,Cena,13
 2026-06-03,Ropa,Ropa,45
@@ -226,12 +226,11 @@ fecha,categoria,detalle,monto_bs
 2026-06-12,Diversión,Fiesta,92
 2026-06-13,Comida,Cena,68
 2026-06-13,Comida,Snacks,33
-2026-06-13,Comunicación,Credito,60
+2026-06-13,Personal,Credito,60
 2026-06-13,Ropa,Ropa,120
 2026-06-13,Ropa,Ropa,20
 2026-06-15,Transporte,Gasolina,50
 2026-06-15,Transporte,Moto/mantenimiento,390
-2026-06-16,Prestamo,,40
 2026-06-17,Hobbies,Papeleria,20
 2026-06-19,Transporte,Gasolina,140
 2026-06-19,Transporte,Auto/piezas,90
@@ -276,7 +275,7 @@ fecha,categoria,detalle,monto_bs
 2026-07-14,Otros,,3
 2026-07-15,Comida,Cena,30
 2026-07-16,Otros,,5
-2026-07-16,Desconocidos,,54
+2026-07-16,Otros,,54
 2026-07-16,Otros,Arbitraje,40
 2026-07-17,Transporte,Moto/piezas,45
 2026-07-17,Transporte,Moto/mantenimiento,40
@@ -315,8 +314,8 @@ fecha,categoria,detalle,monto_bs
 2026-08-05,Comida,Almuerzo,25
 2026-08-05,Transporte,Gasolina,50
 2026-08-05,Otros,Mensualidad Canarias,100
-2026-08-06,Cita,Comida,98
-2026-08-06,Cita,Pizza,87
+2026-08-06,Comida,Comida,98
+2026-08-06,Comida,Pizza,87
 2026-08-07,Comida,Cena,15
 2026-08-08,Comida,Snacks,24
 2026-08-08,Comida,Sopas,45
@@ -324,7 +323,7 @@ fecha,categoria,detalle,monto_bs
 2026-08-11,Ofrendas,Diezmo,1005
 2026-08-11,Personal,Mochila,150
 2026-08-11,Personal,Corte de cabello,20
-2026-08-11,Cuota lote,Cuota lote SJ,400
+2026-08-11,Pago deuda,Cuota lote SJ,400
 2026-08-11,Comida,Almuerzo,7
 2026-08-11,Personal,Viaje,170
 2026-08-11,Personal,Equipo/camping,300
@@ -349,7 +348,7 @@ fecha,categoria,detalle,monto_bs
 2026-08-17,Educación,Pathway,308
 2026-08-17,Comida,Cena,32
 2026-08-17,Comida,Soda,12
-2026-08-17,Desconocidos,,48
+2026-08-17,Otros,,48
 2026-08-17,Transporte,Parqueo,5
 2026-08-17,Comida,Snacks,13
 2026-08-17,Comida,Cena,34
@@ -357,7 +356,7 @@ fecha,categoria,detalle,monto_bs
 2026-08-18,Comida,Soda,12
 2026-08-19,Comida,Cena,57
 2026-08-20,Comida,Cena/cita,54
-2026-08-21,Desconocidos,,15
+2026-08-21,Otros,,15
 2026-08-21,Transporte,Gasolina/Moto,35
 2026-08-21,Comida,Cena,34
 2026-08-22,Hobbies,Maceta,80
@@ -370,7 +369,7 @@ fecha,categoria,detalle,monto_bs
 2026-08-24,Comida,Soda,12
 2026-08-25,Comida,Condimentos,24
 2026-08-26,Transporte,Gasolina/Moto,50
-2026-08-26,Desconocidos,,12
+2026-08-26,Otros,,12
 2026-08-27,Comida,Almuerzo,16
 2026-08-27,Comida,Soda,12
 2026-08-27,Ropa,Casco,850
@@ -380,7 +379,7 @@ fecha,categoria,detalle,monto_bs
 2026-08-28,Comida,Cena,45
 2026-08-29,Comida,Soda,20
 2026-08-29,Comida,Snacks,8
-2026-08-29,Desconocidos,,50
+2026-08-29,Otros,,50
 2026-08-31,Salud,Curación,30
 2026-08-31,Comida,Snacks,15
 2026-09-02,Salud,Curación,30
@@ -442,7 +441,7 @@ fecha,categoria,detalle,monto_bs
 2026-09-25,Comida,Cena,40
 2026-09-28,Comida,Almuerzo,13
 2026-09-28,Comida,Yerba,35
-2026-09-28,Desconocidos,,8
+2026-09-28,Otros,,8
 2026-09-29,Comida,Almuerzo,13
 2026-09-29,Comida,Cena,77
 2026-09-30,Comida,Cena,21
@@ -492,7 +491,7 @@ fecha,categoria,detalle,monto_bs
 2026-10-16,Hobbies,Herramientas,220
 2026-10-16,Comida,Snacks,10
 2026-10-17,Comida,Soda,13
-2026-10-17,Desconocidos,,50
+2026-10-17,Otros,,50
 2026-10-18,Otros,Museos,20
 2026-10-18,Comida,Cena/cita,130
 2026-10-18,Transporte,Parqueo,15

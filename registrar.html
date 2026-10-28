@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar gasto</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body data-pagina="registrar">
+  <main>
+    <h1>Registrar gasto</h1>
+
+    <form id="form-gasto">
+      <label for="fecha">Fecha</label>
+      <input type="date" id="fecha" required>
+
+      <label for="categoria">Categoría</label>
+      <input type="text" id="categoria" list="categorias" required>
+      <datalist id="categorias">
+        <option value="Comida">
+        <option value="Transporte">
+        <option value="Personal">
+        <option value="Ropa">
+        <option value="Hobbies">
+        <option value="Diversión">
+        <option value="Salud">
+        <option value="Educación">
+        <option value="Servicios">
+        <option value="Ofrendas">
+        <option value="Ahorro">
+        <option value="Pago deuda">
+        <option value="Otros">
+      </datalist>
+
+      <label for="detalle">Detalle</label>
+      <input type="text" id="detalle">
+
+      <label for="monto">Monto (Bs)</label>
+      <input type="number" id="monto" step="0.01" min="0.01" inputmode="decimal" required>
+
+      <button type="submit" class="boton">Guardar</button>
+    </form>
+
+    <p id="mensaje"></p>
+
+    <a href="./index.html" class="boton">Volver</a>
+  </main>
+
+  <script src="registrar.js"></script>
+</body>
+</html>
