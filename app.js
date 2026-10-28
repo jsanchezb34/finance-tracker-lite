@@ -242,7 +242,75 @@ async function iniciar() {
     }
   } else if (pagina === "gastos") {
     mostrarLista([...gastos].reverse(), contenedor);
+
+      } else if (pagina === "gastos") {
+    const periodos = parsearPeriodos(await cargarTexto("data/periodos.csv"));
+    iniciarFiltros(gastos, periodos, contenedor);
   }
-}
+  }
+
+  
+
+
+
 
 iniciar();
+
+/* ---------- Filtros ---------- */
+
+function etiquetaPeriodo(p) {
+  const fin = p.fin ? formatearFechaCompleta(p.fin) : "hoy";
+  return `${formatearFechaCompleta(p.inicio)} – ${fin}`;
+}
+
+function iniciarFiltros(gastos, periodos, contenedor) {
+  const selCategoria = document.getElementById("filtro-categoria");
+  const selPeriodo = document.getElementById("filtro-periodo");
+  const campoDesde = document.getElementById("filtro-desde");
+  const campoHasta = document.getElementById("filtro-hasta");
+
+  const categorias = [...new Set(gastos.map(g => g.categoria))]
+    .sort((a, b) => a.localeCompare(b));
+  categorias.forEach(c => selCategoria.add(new Option(c, c)));
+
+  const periodosOrdenados = periodos
+    .filter(p => p.inicio)
+    .sort((a, b) => b.inicio.localeCompare(a.inicio)); // el más nuevo primero
+  periodosOrdenados.forEach((p, i) => selPeriodo.add(new Option(etiquetaPeriodo(p), i)));
+
+  function actualizar() {
+    const categoria = selCategoria.value;
+    const desde = campoDesde.value;
+    const hasta = campoHasta.value;
+
+    const filtrados = gastos.filter(g =>
+      (!categoria || g.categoria === categoria) &&
+      (!desde || g.fecha >= desde) &&
+      (!hasta || g.fecha <= hasta)
+    );
+
+    if (filtrados.length === 0) {
+      contenedor.innerHTML = "<p>No hay gastos con esos filtros.</p>";
+      return;
+    }
+    mostrarLista([...filtrados].reverse(), contenedor);
+  }
+
+  selCategoria.addEventListener("change", actualizar);
+
+  selPeriodo.addEventListener("change", () => {
+    const periodo = periodosOrdenados[selPeriodo.value];
+    campoDesde.value = periodo ? periodo.inicio : "";
+    campoHasta.value = periodo ? (periodo.fin || hoyISO()) : "";
+    actualizar();
+  });
+
+  [campoDesde, campoHasta].forEach(campo => {
+    campo.addEventListener("input", () => {
+      selPeriodo.value = "";
+      actualizar();
+    });
+  });
+
+  actualizar();
+}

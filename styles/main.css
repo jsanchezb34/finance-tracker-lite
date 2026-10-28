@@ -208,3 +208,33 @@ main {
     cursor: pointer;
     font-family: inherit;
 }
+
+/* Filtros */
+#filtros {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: var(--background2);
+    border-radius: 12px;
+}
+
+#filtros label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+#filtros select,
+#filtros input {
+    min-width: 0;
+    padding: 0.5rem;
+    border: 1px solid var(--background-dark);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+}
