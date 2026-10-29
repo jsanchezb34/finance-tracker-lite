@@ -74,20 +74,6 @@ main {
     text-align: center;
 }
 
-.totales {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background-color: var(--background-dark);
-    border-radius: 12px;
-    padding-left: 1rem;
-    padding: 0;
-}
-
-.totales p {
-    font-size: .8rem;
-    margin: .4rem;
-    text-align: left;
-}
 
 .boton {
     background-color: var(--main);
