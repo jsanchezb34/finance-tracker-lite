@@ -5,7 +5,7 @@
 
     --background1: #ffffff;
     --background2: #d9d9d9;
-    --background-dark: #bdbdbd;
+    --background-dark: #363535;
 
     --text: #000000;
     --text-light: #ffffff;
@@ -42,11 +42,13 @@ main {
 }
 
 #main-total h3 {
+    color: var(--text-light);
     font-size: 3rem;
     margin: 0.5rem 0 0;
 }
 
 #main-total p {
+    color: var(--text-light);
     margin: 0;
     margin-bottom: .5rem;
 }
@@ -74,6 +76,20 @@ main {
     text-align: center;
 }
 
+.totales {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--background-dark);
+    border-radius: 12px;
+    padding-left: 1rem;
+    padding: 0;
+}
+
+.totales p {
+    font-size: .8rem;
+    margin: .4rem;
+    text-align: left;
+}
 
 .boton {
     background-color: var(--main);
@@ -246,6 +262,7 @@ main {
     border-radius: 8px;
     font-family: inherit;
     font-size: 1rem;
+    border: none;
 }
 
 /* Total filtrado */
