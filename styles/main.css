@@ -89,6 +89,7 @@ main {
     font-size: .8rem;
     margin: .4rem;
     text-align: left;
+    color: var(--text-light);
 }
 
 .boton {
@@ -330,4 +331,74 @@ body[data-pagina="gastos"] #main-total h3 {
 
 body[data-pagina="gastos"] #main-card > section:first-child .boton {
     align-self: center;
+}
+
+/* Informes */
+#informe-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: var(--background2);
+    border-radius: 16px;
+}
+
+#informe-card h2 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+#informe-card label {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+#informe-card select {
+    padding: 0.5rem;
+    border: 1px solid var(--background-dark);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+#grafico-barras {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 230px;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    background-color: var(--background1);
+    border-radius: 12px;
+}
+
+.barra-col {
+    flex: 1;
+    min-width: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+.barra {
+    width: 100%;
+    min-height: 2px;
+    background-color: var(--main);
+    border-radius: 6px 6px 0 0;
+}
+
+.barra-valor,
+.barra-etiqueta {
+    font-size: 0.65rem;
+}
+
+.nota {
+    margin: 0;
+    font-size: 0.75rem;
+    opacity: 0.7;
 }

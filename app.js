@@ -234,6 +234,46 @@ function mostrarDona(gastosPeriodo, presupuesto) {
   });
 }
 
+/* ---------- Informes ---------- */
+
+const ALTO_BARRAS = 160;
+
+function iniciarInformes(gastos, periodos) {
+  const selCategoria = document.getElementById("informe-categoria");
+  const contenedor = document.getElementById("grafico-barras");
+
+  [...new Set(gastos.map(g => g.categoria))]
+    .sort((a, b) => a.localeCompare(b))
+    .forEach(c => selCategoria.add(new Option(c, c)));
+
+  const ordenados = periodos
+    .filter(p => p.inicio)
+    .sort((a, b) => a.inicio.localeCompare(b.inicio)) // del más antiguo al más nuevo
+    .map(p => ({ ...p, fin: p.fin || hoyISO() }));
+
+  function dibujar() {
+    const categoria = selCategoria.value;
+    const base = categoria ? gastos.filter(g => g.categoria === categoria) : gastos;
+
+    const datos = ordenados.map(p => ({
+      etiqueta: formatearFecha(p.inicio),
+      total: sumarMontos(gastosDelPeriodo(base, p))
+    }));
+    const maximo = Math.max(...datos.map(d => d.total), 1);
+
+    contenedor.innerHTML = datos.map(d => `
+      <div class="barra-col">
+        <span class="barra-valor">${Math.round(d.total)}</span>
+        <div class="barra" style="height:${Math.round((d.total / maximo) * ALTO_BARRAS)}px"></div>
+        <span class="barra-etiqueta">${d.etiqueta}</span>
+      </div>
+    `).join("");
+  }
+
+  selCategoria.addEventListener("change", dibujar);
+  dibujar();
+}
+
 /* ---------- Inicio ---------- */
 
 async function iniciar() {
@@ -254,8 +294,13 @@ async function iniciar() {
   } else if (pagina === "gastos") {
     const periodos = parsearPeriodos(await cargarTexto("data/periodos.csv"));
     iniciarFiltros(gastos, periodos, contenedor);
+
+    } else if (pagina === "informes") {
+    const periodos = parsearPeriodos(await cargarTexto("data/periodos.csv"));
+    iniciarInformes(gastos, periodos);
   }
-}
+  }
+
 
 iniciar();
 
@@ -286,17 +331,21 @@ function iniciarFiltros(gastos, periodos, contenedor) {
     .sort((a, b) => b.inicio.localeCompare(a.inicio)); // el más nuevo primero
   periodosOrdenados.forEach((p, i) => selPeriodo.add(new Option(etiquetaPeriodo(p), i)));
 
-  function actualizar() {
+    function actualizar() {
     const categoria = selCategoria.value;
     const desde = campoDesde.value;
     const hasta = campoHasta.value;
-    const texto = normalizar(campoTexto.value.trim());
+    const palabras = campoTexto.value
+      .split(",")
+      .map(p => normalizar(p.trim()))
+      .filter(p => p !== "");
 
     const filtrados = gastos.filter(g =>
       (!categoria || g.categoria === categoria) &&
       (!desde || g.fecha >= desde) &&
       (!hasta || g.fecha <= hasta) &&
-      (!texto || normalizar(g.detalle || "").includes(texto))
+      (palabras.length === 0 ||
+        palabras.some(p => normalizar(g.detalle || "").includes(p)))
     );
 
     document.getElementById("total-valor").textContent =

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informes</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body data-pagina="informes">
+  <main>
+    <h1>Informes</h1>
+
+    <section id="informe-card">
+      <h2>Gasto por periodo</h2>
+
+      <label for="informe-categoria">Categoría</label>
+      <select id="informe-categoria">
+        <option value="">Todas</option>
+      </select>
+
+      <div id="grafico-barras"></div>
+      <p class="nota">Cada barra empieza en la fecha indicada (día/mes).</p>
+    </section>
+
+    <a href="./index.html" class="boton">Volver</a>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
