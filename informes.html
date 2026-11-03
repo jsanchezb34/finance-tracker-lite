@@ -22,9 +22,28 @@
       <p class="nota">Cada barra empieza en la fecha indicada (día/mes).</p>
     </section>
 
+    <section id="slides-card">
+      <h2>Dona por periodo</h2>
+
+      <div id="slide">
+        <p id="slide-titulo"></p>
+        <p id="slide-resumen"></p>
+        <svg id="slide-dona" viewBox="0 0 100 100"></svg>
+      </div>
+
+      <div id="slide-controles">
+        <button type="button" id="slide-prev" aria-label="Periodo anterior">&#8249;</button>
+        <div id="slide-puntos"></div>
+        <button type="button" id="slide-next" aria-label="Periodo siguiente">&#8250;</button>
+      </div>
+      <button type="button" id="slide-auto" aria-pressed="true">Pausar</button>
+    </section>
+
     <a href="./index.html" class="boton">Volver</a>
   </main>
 
-  <script src="app.js"></script>
+  <div id="banner" class="banner" hidden></div>
+
+  <script type="module" src="js/informes.js"></script>
 </body>
 </html>

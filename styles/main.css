@@ -142,19 +142,19 @@ main {
     height: 150px;
 }
 
-#dona circle {
+.dona circle {
     fill: none;
     stroke-width: 20;
     cursor: pointer;
 }
 
-#dona text {
+.dona text {
     font-size: 6px;
     font-weight: bold;
     pointer-events: none;
 }
 
-#dona text.advertencia {
+.dona text.advertencia {
     font-size: 22px;
     fill: #d93025;
 }
@@ -500,4 +500,103 @@ body[data-pagina="gastos"] #lista {
     background: transparent;
     cursor: pointer;
     font-family: inherit;
+}
+
+/* Dona por periodo (slides) */
+#slides-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: var(--background2);
+    border-radius: 16px;
+}
+
+#slides-card h2 {
+    align-self: flex-start;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+#slide {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px;
+    box-sizing: border-box;
+    background-color: var(--background1);
+    border-radius: 12px;
+    touch-action: pan-y;
+}
+
+#slide-titulo {
+    margin: 0;
+    font-weight: bold;
+}
+
+#slide-resumen {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+#slide-dona {
+    display: block;
+    width: 170px;
+    height: 170px;
+}
+
+#slide-controles {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#slide-prev,
+#slide-next {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--main);
+    color: var(--text-light);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#slide-puntos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    max-width: 200px;
+}
+
+.punto-slide {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--background-dark);
+    cursor: pointer;
+}
+
+.punto-slide.activo {
+    background-color: var(--main);
+}
+
+#slide-auto {
+    padding: 6px 12px;
+    border: 0;
+    border-radius: 8px;
+    background-color: var(--background1);
+    font-family: inherit;
+    cursor: pointer;
 }
