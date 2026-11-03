@@ -45,14 +45,36 @@
     
 
     <section id="lista">
-      <div class="fila encabezado">
-        <span>Fecha</span>
-        <span>Categoría</span>
-        <span>Detalle</span>
-        <span>Monto</span>
-      </div>
-      <div id="lista-filas"></div>
-    </section>
+  <div class="fila encabezado">
+    <div class="celda-titulo">
+      <span>Fecha</span>
+      <button type="button" class="btn-filtro" data-col="fecha" aria-label="Filtrar por fecha">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></svg>
+      </button>
+    </div>
+    <div class="celda-titulo">
+      <span>Categoría</span>
+      <button type="button" class="btn-filtro" data-col="categoria" aria-label="Filtrar por categoría">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></svg>
+      </button>
+    </div>
+    <div class="celda-titulo">
+      <span>Detalle</span>
+      <button type="button" class="btn-filtro" data-col="detalle" aria-label="Filtrar por detalle">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></svg>
+      </button>
+    </div>
+    <div class="celda-titulo">
+      <span>Monto</span>
+      <button type="button" class="btn-filtro" data-col="monto" aria-label="Filtrar por monto">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="menu-filtro" class="menu-filtro" hidden></div>
+  <div id="lista-filas"></div>
+</section>
   </main>
 
   <script src="app.js"></script>
