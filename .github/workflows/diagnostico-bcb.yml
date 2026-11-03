@@ -1,0 +1,43 @@
+name: Diagnóstico BCB
+
+# Se ejecuta a mano desde la pestaña Actions. No modifica nada del repositorio.
+on:
+  workflow_dispatch:
+
+jobs:
+  inspeccionar:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Descargar la portada y la serie histórica
+        run: |
+          UA="Mozilla/5.0 (compatible; finance-tracker-lite)"
+          curl -sS -L --max-time 60 -A "$UA" -o bcb.html \
+            -w "Portada -> HTTP: %{http_code}, bytes: %{size_download}\n" \
+            "https://www.bcb.gob.bo/"
+          curl -sS -L --max-time 60 -A "$UA" -o serie.html \
+            -w "Serie historica -> HTTP: %{http_code}, bytes: %{size_download}\n" \
+            "https://www.bcb.gob.bo/?q=content/valor-referencial-de-compra-del-d%C3%B3lar-estadounidense-3"
+
+      - name: Bloque Tipo de cambio oficial de la portada
+        run: |
+          awk '/1\) Tipo de cambio oficial/{f=1} /2\) Tabla de cotizaciones/{f=0} f' bcb.html | cut -c1-400 | head -80
+
+      - name: Lineas con bcb-tco y posibles servicios de datos
+        run: |
+          echo "--- bcb-tco"
+          grep -n "bcb-tco" bcb.html | cut -c1-300 | head -40
+          echo "--- fetch, json, api"
+          grep -o -i -E ".{0,80}(fetch\(|XMLHttpRequest|\.json|/api/).{0,140}" bcb.html | head -20
+
+      - name: Primeras filas de la serie historica
+        run: |
+          echo "tablas en la pagina: $(grep -c '<table' serie.html)"
+          grep -o -i -E "<tr.{0,400}" serie.html | head -12
+
+      - name: Guardar los HTML como archivos descargables
+        uses: actions/upload-artifact@v4
+        with:
+          name: bcb-html
+          path: |
+            bcb.html
+            serie.html
