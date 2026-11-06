@@ -36,10 +36,21 @@ export function parsearPeriodos(texto) {
   });
 }
 
+export function parsearDolar(texto) {
+  return lineasDeDatos(texto).map(linea => {
+    const [desde, hasta, tco, fuente] = linea.split(",");
+    return { desde, hasta, tco: parseFloat(tco), fuente: (fuente || "bcb").trim() };
+  });
+}
+
 export async function cargarGastos() {
   return parsearCSV(await cargarTexto("data/gastos.csv"));
 }
 
 export async function cargarPeriodos() {
   return parsearPeriodos(await cargarTexto("data/periodos.csv"));
+}
+
+export async function cargarDolar() {
+  return parsearDolar(await cargarTexto("data/dolar.csv"));
 }

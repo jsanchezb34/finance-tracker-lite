@@ -600,3 +600,85 @@ body[data-pagina="gastos"] #lista {
     font-family: inherit;
     cursor: pointer;
 }
+
+/* Dólar */
+#dolar-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: var(--background2);
+    border-radius: 16px;
+}
+
+#dolar-card h2 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+#dolar-ultimo {
+    margin: 0;
+    font-weight: bold;
+}
+
+#dolar-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background-color: var(--background1);
+    border-radius: 12px;
+}
+
+#dolar-svg .rejilla {
+    stroke: var(--background-dark);
+    stroke-width: 0.5;
+}
+
+#dolar-svg text {
+    font-size: 9px;
+    fill: var(--text);
+}
+
+#dolar-svg circle {
+    stroke-width: 2;
+    cursor: pointer;
+}
+
+#dolar-svg circle.bcb {
+    fill: var(--secondary1);
+    stroke: var(--secondary1);
+}
+
+#dolar-svg circle.aprox {
+    fill: var(--background1);
+    stroke: var(--main);
+}
+
+#dolar-svg circle.activo {
+    stroke: #d93025;
+}
+
+.leyenda-dolar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.leyenda-dolar .punto {
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.punto.bcb {
+    background-color: var(--secondary1);
+}
+
+.punto.aprox {
+    background-color: var(--background1);
+    border: 2px solid var(--main);
+}

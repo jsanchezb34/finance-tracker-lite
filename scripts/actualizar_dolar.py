@@ -2,7 +2,9 @@
 
 Usa solo la biblioteca estándar de Python (no hay que instalar nada).
 Cada fila indica desde y hasta qué fecha rige un valor (por fines de semana
-y feriados, un mismo valor puede regir varios días).
+y feriados, un mismo valor puede regir varios días). La columna "fuente" es
+"bcb" para valores leídos de la página y "periodos" para valores aproximados
+tomados de periodos.csv.
 """
 
 import csv
@@ -15,7 +17,7 @@ from pathlib import Path
 
 URL = os.environ.get("BCB_URL", "https://www.bcb.gob.bo/")
 ARCHIVO = Path(__file__).resolve().parent.parent / "data" / "dolar.csv"
-ENCABEZADO = ["vigente_desde", "vigente_hasta", "tco"]
+ENCABEZADO = ["vigente_desde", "vigente_hasta", "tco", "fuente"]
 
 MESES = {
     "ENERO": 1, "FEBRERO": 2, "MARZO": 3, "ABRIL": 4, "MAYO": 5, "JUNIO": 6,
@@ -85,7 +87,10 @@ def leer_filas():
     if not ARCHIVO.exists():
         return []
     with ARCHIVO.open(newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+        filas = list(csv.DictReader(f))
+    for fila in filas:
+        fila.setdefault("fuente", "bcb")  # archivos antiguos sin esta columna
+    return filas
 
 
 def guardar(filas):
@@ -98,7 +103,7 @@ def guardar(filas):
 
 def main():
     desde, hasta, tco = extraer(descargar(URL))
-    nueva = {"vigente_desde": desde, "vigente_hasta": hasta, "tco": f"{tco:.2f}"}
+    nueva = {"vigente_desde": desde, "vigente_hasta": hasta, "tco": f"{tco:.2f}", "fuente": "bcb"}
     print(f"BCB: {nueva['tco']} Bs/USD, vigente del {desde} al {hasta}")
 
     filas = leer_filas()
