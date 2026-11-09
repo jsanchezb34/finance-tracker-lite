@@ -7,6 +7,7 @@ import {
 } from "./utilidades.js";
 import { mostrarLista } from "./lista.js";
 import { mostrarDona } from "./dona.js";
+import { iniciarDolar } from "./dolar.js";
 
 function mostrarResumen(periodo, gastosPeriodo) {
   document.getElementById("gasto-total").textContent = Math.round(sumarMontos(gastosPeriodo));
@@ -29,3 +30,4 @@ async function iniciar() {
 }
 
 iniciar().catch(mostrarError);
+iniciarDolar().catch(mostrarError); // independiente: si falla, el resto de la página sigue
