@@ -88,6 +88,12 @@ export async function iniciarDolar() {
     x: ANCHO - MARGEN.der, y: ALTO - 8, "text-anchor": "end"
   }, formatearFecha(final.desde)));
 
+    // línea que une los puntos en orden de fecha (va antes de los puntos para quedar detrás)
+  svg.appendChild(crear("polyline", {
+    points: datos.map(d => `${x(Date.parse(d.desde))},${y(d.tco)}`).join(" "),
+    class: "linea-dolar"
+  }));
+
   const puntos = datos.map(d => {
     const punto = crear("circle", {
       cx: x(Date.parse(d.desde)),

@@ -682,3 +682,12 @@ body[data-pagina="gastos"] #lista {
     background-color: var(--background1);
     border: 2px solid var(--main);
 }
+
+
+#dolar-svg .linea-dolar {
+    fill: none;
+    stroke: var(--main);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
