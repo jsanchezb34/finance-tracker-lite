@@ -88,17 +88,21 @@ export async function iniciarDolar() {
     x: ANCHO - MARGEN.der, y: ALTO - 8, "text-anchor": "end"
   }, formatearFecha(final.desde)));
 
-    // línea que une los puntos en orden de fecha (va antes de los puntos para quedar detrás)
+  // línea que une los puntos en orden de fecha (va antes de los puntos para quedar detrás)
   svg.appendChild(crear("polyline", {
     points: datos.map(d => `${x(Date.parse(d.desde))},${y(d.tco)}`).join(" "),
     class: "linea-dolar"
   }));
 
-  const puntos = datos.map(d => {
+  const RADIO_PUNTO = 2.5;
+  const RADIO_ACTIVO = 4;
+  const posiciones = datos.map(d => [x(Date.parse(d.desde)), y(d.tco)]);
+
+  const puntos = datos.map((d, i) => {
     const punto = crear("circle", {
-      cx: x(Date.parse(d.desde)),
-      cy: y(d.tco),
-      r: 4.5,
+      cx: posiciones[i][0],
+      cy: posiciones[i][1],
+      r: RADIO_PUNTO,
       class: d.fuente === "bcb" ? "bcb" : "aprox"
     });
     punto.appendChild(crear("title", {}, describir(d)));
@@ -107,10 +111,32 @@ export async function iniciarDolar() {
   });
 
   function seleccionar(i) {
-    puntos.forEach((p, n) => p.classList.toggle("activo", n === i));
+    puntos.forEach((p, n) => {
+      p.classList.toggle("activo", n === i);
+      p.setAttribute("r", n === i ? RADIO_ACTIVO : RADIO_PUNTO);
+    });
     detalle.textContent = describir(datos[i]);
   }
 
-  puntos.forEach((punto, i) => punto.addEventListener("click", () => seleccionar(i)));
+  // Al tocar el gráfico se elige el punto más cercano (zona de toque amplia aunque los puntos sean pequeños)
+  svg.addEventListener("click", e => {
+    const caja = svg.getBoundingClientRect();
+    if (!caja.width) return;
+    const escala = ANCHO / caja.width;
+    const toqueX = (e.clientX - caja.left) * escala;
+    const toqueY = (e.clientY - caja.top) * escala;
+
+    let mejor = -1;
+    let distanciaMejor = Infinity;
+    posiciones.forEach(([px, py], i) => {
+      const distancia = Math.hypot(px - toqueX, py - toqueY);
+      if (distancia < distanciaMejor) {
+        distanciaMejor = distancia;
+        mejor = i;
+      }
+    });
+    if (distanciaMejor <= 14) seleccionar(mejor);
+  });
+
   seleccionar(datos.length - 1);
 }
