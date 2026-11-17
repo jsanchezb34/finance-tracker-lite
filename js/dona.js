@@ -79,11 +79,12 @@ function mostrarBanner(dona, indices) {
 }
 
 export function cerrarBannerAlTocarFondo() {
-  document.getElementById("banner").addEventListener("click", e => {
+  // onclick reemplaza el manejador anterior (no se acumulan al redibujar)
+  document.getElementById("banner").onclick = e => {
     if (e.target === e.currentTarget) {
       e.currentTarget.hidden = true;
     }
-  });
+  };
 }
 
 export function dibujarDona(svg, dona) {
@@ -135,13 +136,19 @@ export function dibujarDona(svg, dona) {
 // Dona de la página de inicio (con botón "Ver detalle")
 export function mostrarDona(gastosPeriodo, presupuesto) {
   const dona = calcularDona(gastosPeriodo, presupuesto);
-  if (dona.suma === 0) return;
+  const svg = document.getElementById("dona");
 
-  dibujarDona(document.getElementById("dona"), dona);
+  if (dona.suma === 0) {
+    svg.innerHTML = "";
+    return;
+  }
 
-  document.getElementById("btn-detalle").addEventListener("click", () => {
+  dibujarDona(svg, dona);
+
+  // onclick reemplaza el manejador anterior (no se acumulan al redibujar)
+  document.getElementById("btn-detalle").onclick = () => {
     mostrarBanner(dona, dona.grupos.map((_, i) => i));
-  });
+  };
 
   cerrarBannerAlTocarFondo();
 }

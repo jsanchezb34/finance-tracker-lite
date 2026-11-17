@@ -40,6 +40,13 @@ export function sumarMontos(gastos) {
   return gastos.reduce((s, g) => s + g.monto, 0);
 }
 
+// Categorías que cuentan como diezmo y ofrendas (se pueden excluir de los cálculos)
+const CATEGORIAS_DIEZMO = ["ofrendas", "ofrenda", "donativos", "diezmo"];
+
+export function esDiezmo(gasto) {
+  return CATEGORIAS_DIEZMO.includes(normalizar(gasto.categoria));
+}
+
 export function obtenerUltimos(gastos, cantidad) {
   return gastos.slice(-cantidad).reverse(); // reverse() deja el más reciente primero
 }

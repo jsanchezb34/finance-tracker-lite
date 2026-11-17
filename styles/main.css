@@ -691,3 +691,14 @@ body[data-pagina="gastos"] #lista {
     stroke-linejoin: round;
     pointer-events: none;
 }
+
+.opcion-diezmo {
+    display: flex;
+    color: var(--text-light);
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding-bottom: 0.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+}

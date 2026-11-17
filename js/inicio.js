@@ -3,7 +3,7 @@
 import { cargarGastos, cargarPeriodos } from "./datos.js";
 import {
   obtenerUltimos, obtenerPeriodoActual, gastosDelPeriodo,
-  sumarMontos, formatearFechaCompleta, mostrarError
+  sumarMontos, formatearFechaCompleta, esDiezmo, mostrarError
 } from "./utilidades.js";
 import { mostrarLista } from "./lista.js";
 import { mostrarDona } from "./dona.js";
@@ -22,11 +22,21 @@ async function iniciar() {
   mostrarLista(obtenerUltimos(gastos, 10), document.getElementById("lista-filas"));
 
   const periodo = obtenerPeriodoActual(periodos);
-  if (periodo) {
-    const gastosPeriodo = gastosDelPeriodo(gastos, periodo);
-    mostrarResumen(periodo, gastosPeriodo);
-    mostrarDona(gastosPeriodo, periodo.presupuesto);
+  if (!periodo) return;
+
+  const gastosPeriodo = gastosDelPeriodo(gastos, periodo);
+  const casilla = document.getElementById("incluir-diezmo");
+
+  // Por defecto no se cuentan el diezmo ni las ofrendas; la casilla los incluye
+  function actualizar() {
+    const incluir = casilla && casilla.checked;
+    const considerados = incluir ? gastosPeriodo : gastosPeriodo.filter(g => !esDiezmo(g));
+    mostrarResumen(periodo, considerados);
+    mostrarDona(considerados, periodo.presupuesto);
   }
+
+  if (casilla) casilla.addEventListener("change", actualizar);
+  actualizar();
 }
 
 iniciar().catch(mostrarError);
