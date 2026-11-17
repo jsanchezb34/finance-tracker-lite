@@ -1,6 +1,6 @@
 // Dona por periodo en formato slideshow (página de informes)
 
-import { hoyISO, etiquetaPeriodo, gastosDelPeriodo } from "./utilidades.js";
+import { hoyISO, etiquetaPeriodo, gastosDelPeriodo, esDiezmo } from "./utilidades.js";
 import { calcularDona, dibujarDona, cerrarBannerAlTocarFondo } from "./dona.js";
 
 const INTERVALO_SLIDES = 4000;
@@ -17,6 +17,7 @@ export function iniciarSlides(gastos, periodos) {
   const resumen = document.getElementById("slide-resumen");
   const puntos = document.getElementById("slide-puntos");
   const botonAuto = document.getElementById("slide-auto");
+  const casilla = document.getElementById("slide-incluir-diezmo");
 
   let indice = ordenados.length - 1; // empieza en el periodo más reciente
   let temporizador = null;
@@ -29,7 +30,10 @@ export function iniciarSlides(gastos, periodos) {
     indice = (i + ordenados.length) % ordenados.length;
     const p = ordenados[indice];
     const presupuesto = p.presupuesto || 0;
-    const gastosPeriodo = gastosDelPeriodo(gastos, { ...p, fin: p.fin || hoyISO() });
+    const delPeriodo = gastosDelPeriodo(gastos, { ...p, fin: p.fin || hoyISO() });
+    // Por defecto no se cuentan el diezmo ni las ofrendas; la casilla los incluye
+    const incluir = casilla && casilla.checked;
+    const gastosPeriodo = incluir ? delPeriodo : delPeriodo.filter(g => !esDiezmo(g));
     const dona = calcularDona(gastosPeriodo, presupuesto);
 
     titulo.textContent = etiquetaPeriodo(p);
@@ -77,6 +81,9 @@ export function iniciarSlides(gastos, periodos) {
     if (temporizador) pausar();
     else reanudar();
   });
+
+  // al cambiar la casilla se redibuja la diapositiva actual
+  if (casilla) casilla.addEventListener("change", () => mostrar(indice));
 
   // tocar la dona (para ver el detalle) también pausa
   zona.addEventListener("click", pausar);
